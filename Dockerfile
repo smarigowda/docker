@@ -69,3 +69,11 @@ ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/jenkins.sh"]
 # from a derived Dockerfile, can use `RUN plugins.sh active.txt` to setup /usr/share/jenkins/ref/plugins from a support bundle
 COPY plugins.sh /usr/local/bin/plugins.sh
 COPY install-plugins.sh /usr/local/bin/install-plugins.sh
+
+USER root
+RUN apt-get update -y
+RUN apt-get upgrade -y
+RUN apt-get install -y python-setuptools python-dev build-essential  
+RUN apt-get install -y git wget python-virtualenv python-pip build-essential python-dev
+RUN apt-get install -y python-dev python3-dev libxml2-dev libxslt1-dev zlib1g-dev
+USER jenkins
